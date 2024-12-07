@@ -165,3 +165,25 @@ You can read the docs to see what to create
 **General steps:**
 1. Create auth.ts in the root of repository
 2. Create route.ts in api folder 
+
+**Tips**
+- If we want to add a custom field to the token for middleware auth,
+- we can do this in `auth.ts`
+- Add session and jwt callbacks
+  - Set the field in token in token callback
+  - Set the field in session from the token above in session callback
+  - This is useful for role based access
+- You have to declare modules to extend Session and Token interfaces
+  - Check out auth.js docs, under getting-started/typescript/module augmentation
+  - Useful for role based access
+
+### Callbacks in auth.ts
+
+- signIn
+  - We can modify the sign in behaviour
+  - Prevent sign in if email is not verified etc
+- session
+  - From token, we can add custom fields to session
+  - Add the user id into session from `token.sub`
+- jwt
+  - Add custom fields into jwt token
