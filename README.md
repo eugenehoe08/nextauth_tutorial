@@ -1,5 +1,9 @@
 # Learnings
 
+testUser:
+email: testingUser@example.com
+password: 123456
+
 ## General Folder Structure
 
 - actions
@@ -7,8 +11,7 @@
 - app
   - App Router folder
   - This is where you store your frontend stuff
-- api
-  - Backend api routes
+  - Create api folder in this for api backend routes
 - components
   - To store shadcn components and self-created common components
   - You can create nested directories here to group your common components
@@ -18,6 +21,26 @@
   - utils.ts
 - schemas
   - To store zod schemas for validation
+
+## Files Structure in root of repo
+
+- auth.ts
+  - setup nextauth
+- auth.config.ts
+  - Edge compatability
+  - This is to support prisma adapter as a database
+- routes.ts
+  - to put all your public, protected, private routes
+  - Good to have auth api prefix to prevent checking of auth for such routes
+- middleware.ts
+  - setup middleware for auth
+  - `const {nextUrl} = req`
+  - check isLoggedIn, isApiAuthRoute, isPublicRoute
+  - based on the routes, write your logic
+- .env
+  - environment file
+- .prettierrc
+  - For local development
 
 ## Essential packages to install with NextJS
 
@@ -127,10 +150,18 @@ We can use `loginSchema.safeParse(values)` to validate our input when sending it
 
 `npm install @prisma/client @auth/prisma-adapter`
 `npm install prisma --save-dev`
+`npm install next-auth@beta`
 
-### Steps
+### Steps for prisma database setup
 1. `npx prisma init`
 2. Do your configurations for prisma, setting the database_url etc.
 3. `npx prisma generate`
 4. `npx prisma db push`
    1. This is to push your changes to the db 
+
+### Steps to configure nextauth V5
+You can read the docs to see what to create
+
+**General steps:**
+1. Create auth.ts in the root of repository
+2. Create route.ts in api folder 
