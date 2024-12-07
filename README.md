@@ -13,7 +13,9 @@
   - To store shadcn components and self-created common components
   - You can create nested directories here to group your common components
 - lib
-  - utils.tsx
+  - db.ts
+    - Store prisma configuration file
+  - utils.ts
 - schemas
   - To store zod schemas for validation
 
@@ -25,6 +27,8 @@
   - To make form validation easier
 - @radix-ui/react-icons
   - Basic react icons to use
+- @prisma/client
+  - To use prisma (database) with the client
 - Shadcn
   - Component library that allows you to edit in code
   - Gives you many basic components to use
@@ -39,6 +43,8 @@
 - Prettier
   - Basic formatter to ensure code consistency
 - TailwindCSS
+- Prisma
+  - Database framework
 
 
 ## General knowledge when creating a new project
@@ -113,3 +119,18 @@ export const LoginSchema = z.object({
 ### Backend with zod validation
 
 We can use `loginSchema.safeParse(values)` to validate our input when sending it to the server.
+
+
+## NextAuth V5
+
+### Things to install
+
+`npm install @prisma/client @auth/prisma-adapter`
+`npm install prisma --save-dev`
+
+### Steps
+1. `npx prisma init`
+2. Do your configurations for prisma, setting the database_url etc.
+3. `npx prisma generate`
+4. `npx prisma db push`
+   1. This is to push your changes to the db 
