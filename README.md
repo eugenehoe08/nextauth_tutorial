@@ -176,6 +176,11 @@ You can read the docs to see what to create
 - You have to declare modules to extend Session and Token interfaces
   - Check out auth.js docs, under getting-started/typescript/module augmentation
   - Useful for role based access
+- We can have events in `auth.ts`, where we can update some fields when user signs up etc.
+  - This is to intercept when user is registering
+  - You can write the logic in frontend, and one more time in the backend
+    - This is to ensure both client and server are taking care of invalid fields
+    - This gives higher security
 
 ### Callbacks in auth.ts
 

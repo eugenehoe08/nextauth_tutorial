@@ -6,6 +6,8 @@ import * as z from 'zod'
 import { db } from '@/lib/db'
 import { RegisterSchema } from '@/schemas'
 import { getUserByEmail } from '@/data/user'
+import { generateVerificationToken } from '@/lib/tokens'
+import { sendVerificationEmail } from '@/lib/mail'
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
     const validatedFields = RegisterSchema.safeParse(values)
@@ -36,7 +38,15 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         },
     })
 
-    // TODO: Send verification token email
+    const verificationToken = await generateVerificationToken(email)
 
-    return { success: 'User created' }
+    // This is to enable to send a verification email. However, without adding a domain,
+    // you are only allowed to send to your own email.(
+    // Disable this for now
+    // await sendVerificationEmail(
+    //     verificationToken.email,
+    //     verificationToken.token
+    // )
+
+    return { success: 'Confirmation email sent!' }
 }
