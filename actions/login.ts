@@ -27,19 +27,19 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         return { error: 'Email does not exist!' }
     }
 
-    if (!existingUser.emailVerified) {
-        const verificationToken = await generateVerificationToken(
-            existingUser.email
-        )
-
-        // If email is not verified when logging in, send a verification email
-
-        // await sendVerificationEmail(
-        //     verificationToken.email,
-        //     verificationToken.token
-        // )
-        return { success: 'Confirmation email sent!' }
-    }
+    // if (!existingUser.emailVerified) {
+    //     const verificationToken = await generateVerificationToken(
+    //         existingUser.email
+    //     )
+    //
+    //     // If email is not verified when logging in, send a verification email
+    //
+    //     // await sendVerificationEmail(
+    //     //     verificationToken.email,
+    //     //     verificationToken.token
+    //     // )
+    //     return { success: 'Confirmation email sent!' }
+    // }
 
     try {
         await signIn('credentials', {

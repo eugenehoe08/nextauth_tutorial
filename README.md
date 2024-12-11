@@ -76,6 +76,9 @@ password: 123456
 - Create your reusable components in the components folder 
 - Create an interface/type to pass to your props in react components
   - Convention is to use variable name with Props at the end
+- In development, useEffect is called twice
+  - This does not happen in production
+  - This might lead to some eccentric behaviour during development
 
 ## When using app router, all files to be displayed goes into the app folder
 
