@@ -1,5 +1,3 @@
-import { User } from 'next-auth'
-
 interface UserInfoProps {
     user?: User
     label: string
@@ -8,6 +6,7 @@ interface UserInfoProps {
 import React from 'react'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { User } from '@prisma/client'
 
 const UserInfo = ({ user, label }: UserInfoProps) => {
     return (

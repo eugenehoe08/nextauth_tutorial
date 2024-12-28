@@ -26,7 +26,7 @@ password: 123456
   - db.ts
     - Store prisma configuration file
   - utils.ts
-  - Common functions used in server components
+  - Common functions used in server components or api routes
 - schemas
   - To store zod schemas for validation
 
@@ -244,3 +244,6 @@ You can read the docs to see what to create
   - Common input
 - label
   - Common label
+- sonner
+  - Toast components
+  - These are popups with notifications
