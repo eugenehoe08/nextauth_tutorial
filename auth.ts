@@ -7,6 +7,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { db } from '@/lib/db'
 import { getUserById } from '@/data/user'
 import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation'
+// import { UserRole } from '@prisma/client'
 
 declare module 'next-auth' {
     /**
@@ -16,6 +17,7 @@ declare module 'next-auth' {
         user: {
             /** The user's postal address. */
             role: string
+            isTwoFactorEnabled: boolean
             /**
              * By default, TypeScript merges new interface properties and overwrites existing ones.
              * In this case, the default session user properties will be overwritten,
@@ -26,6 +28,7 @@ declare module 'next-auth' {
     }
     interface User {
         role: string
+        isTwoFactorEnabled: boolean
     }
 }
 
@@ -80,14 +83,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             return true
         },
         async session({ token, session }) {
-            console.log({ sessionToken: token })
-            console.log('Session:', session)
+            // console.log({ sessionToken: token })
+            // console.log('Session:', session)
             if (token.sub && session.user) {
                 session.user.id = token.sub
             }
 
             if (token.role && session.user) {
                 session.user.role = token.role
+            }
+            if (session.user) {
+                session.user.isTwoFactorEnabled =
+                    token.isTwoFactorEnabled as boolean
             }
 
             return session
@@ -106,6 +113,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             }
 
             token.role = existingUser.role
+            token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
 
             return token
         },

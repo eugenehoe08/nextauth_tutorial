@@ -21,10 +21,12 @@ password: 123456
       - This is to simplify the user from session object
       - Instead of writing session.data?.user
       - We can access user directly
+  - This is common functions used in client components
 - lib
   - db.ts
     - Store prisma configuration file
   - utils.ts
+  - Common functions used in server components
 - schemas
   - To store zod schemas for validation
 
@@ -85,6 +87,9 @@ password: 123456
 - In development, useEffect is called twice
   - This does not happen in production
   - This might lead to some eccentric behaviour during development
+- When we do not define use `client` or `use server`
+  - The component will become a client/server component based on the parent component
+  - Basically, we do not care if the component is client or server 
 
 ## When using app router, all files to be displayed goes into the app folder
 
@@ -221,3 +226,21 @@ You can read the docs to see what to create
   - Check if code is correct etc.
 - You need to write the logic for sending 2FA by email
   - This can be done using random number generator and email framework
+
+# Commonly Used ShadCN components
+- avatar
+  - Avatar image for dropdown etc.
+- badge
+  - Small component badge
+- button
+  - Common buttons used
+- card
+  - Common card component
+- dropdown-menu
+  - Dropdown menu
+- form
+  - Form
+- input
+  - Common input
+- label
+  - Common label
