@@ -1,7 +1,7 @@
 # Learnings
 
 testUser:
-email: testingUser@example.com
+email: tutorialmailing@gmail.com
 password: 123456
 
 ## General Folder Structure
@@ -195,3 +195,23 @@ You can read the docs to see what to create
   - Add the user id into session from `token.sub`
 - jwt
   - Add custom fields into jwt token
+
+## General Learnings
+
+### Creating a new model
+- data folder
+  - Repository to handle data from database
+- lib folder
+  - If you are doing anything with generating tokens/mail
+
+### Implementing two factor authentication
+
+- Write logic in callbacks for signin
+  - Check if user is two factor enabled
+  - Get the two factor confirmation from db (this can be a separate db just for two factor token confirmation)
+- Add attribute code into `LoginSchema`
+- In login action, check for two factor token
+  - This is where the business logic of two factor exist
+  - Check if code is correct etc.
+- You need to write the logic for sending 2FA by email
+  - This can be done using random number generator and email framework
