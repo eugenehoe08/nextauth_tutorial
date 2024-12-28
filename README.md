@@ -15,6 +15,12 @@ password: 123456
 - components
   - To store shadcn components and self-created common components
   - You can create nested directories here to group your common components
+- hooks
+  - General hooks to use in your application
+    - `use-current-user.ts` from session
+      - This is to simplify the user from session object
+      - Instead of writing session.data?.user
+      - We can access user directly
 - lib
   - db.ts
     - Store prisma configuration file
