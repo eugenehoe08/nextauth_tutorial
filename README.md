@@ -153,6 +153,11 @@ export const LoginSchema = z.object({
 
 ```
 
+- We can use `refine` to determine the values
+  - For example
+  - password and newPassword needs to be defined
+  - they need to be the same etc
+
 ### Backend with zod validation
 
 We can use `loginSchema.safeParse(values)` to validate our input when sending it to the server.
@@ -227,6 +232,18 @@ You can read the docs to see what to create
 - You need to write the logic for sending 2FA by email
   - This can be done using random number generator and email framework
 
+### Updating Session data
+
+This is useful when trying to update a name that is an attribute in `Session`
+When updating a user's name in the db, the db gets updated but the session might not get updated.
+
+There are generally 2 ways of updating the session.
+
+- In the update onClick function
+  - `const { update } = useSession()`
+  - after updating the name, `.then(() => update())`
+  - This will update the session with the updated data
+
 # Commonly Used ShadCN components
 - avatar
   - Avatar image for dropdown etc.
@@ -247,3 +264,7 @@ You can read the docs to see what to create
 - sonner
   - Toast components
   - These are popups with notifications
+- switch
+  - Toggle switch
+- select
+  - This can be a dropdown menu allowing you to select in `FormField`
