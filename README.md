@@ -124,12 +124,48 @@ folder/folder - Nested route segment
 - page.tsx
   - Stuff to display in the frontend
 
+# Zod
+
+## Dependencies to install
+`npm i react-hook-form zod @hookform/resolvers`
+
+- react-hook-form
+  - Provides hooks for managing forms
+- zod
+  - For schema validation
+- @hookform/resolvers
+  - Enables integration between `react-hook-form` and `zod`
+
+## General steps
+
+1. `import * as z from "zod"`
+2. Create a schema folder that consists of all schemas
+3. Define schema in a file
+```typescript
+export const SettingsSchema = z.object({
+name: z.optional(z.string()),
+isTwoFactorEnabled: z.optional(z.boolean()),
+role: z.enum(['USER', 'ADMIN']),
+email: z.optional(z.string().email()),
+password: z.optional(z.string().min(6)),
+newPassword: z.optional(z.string().min(6)),
+}).refine((data) => {
+    if (data.password && !data.newPassword) {
+    return false
+}
+    return !(data.newPassword && !data.password)
+        }, 
+        { message: 'New password is required!', path: ['newPassword'] }
+)
+```
+4. Set up React Hook Form with zod resolver
+   5. Use `useForm` hook from React Hook Form and pass the zod schema using `zodResolver`
 
 ## Zod validation stuff with react hook form
 Can refer to the docs.
 For the form, you can use this to ensure validation and set messages.
 
-You can either use the default form stuff fromn react-hook-form, or use the form from shadcn.
+You can either use the default form stuff from react-hook-form, or use the form from shadcn.
 
 Typical Example:
 ```typescript jsx
